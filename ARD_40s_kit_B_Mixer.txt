@@ -315,7 +315,10 @@ on init
 	18,...
 	18,...
 	18)
-	
+
+	declare %SNARE_ROLL_SWISH_GROUPS[8] := (78, 81, -1, -1, 84, 87, 90, 93)
+
+
 	declare %oh_purge_groups[23*4]
 {oh1}
 	{0 - Kick}			%oh_purge_groups[0]  := 18
@@ -6945,6 +6948,8 @@ on ui_control($purge_white)
 						inc($count3)
 						wait($LOAD_WAIT)
 					end while
+                    purge_group(%SNARE_ROLL_SWISH_GROUPS[0]+$active_snare,0)
+                    purge_group(%SNARE_ROLL_SWISH_GROUPS[1]+$active_snare,0)                    
 					{kick bleed}
 					if(pgs_get_key_val(INSTRUMENT_PURGE_STATE,0) = 1)
 						$count3 := %bleed_groups[0]
@@ -7013,9 +7018,16 @@ on ui_control($purge_white)
 									inc($count4)
 									wait($LOAD_WAIT)
 								end while
+                                if(%instrument_id_remap[$count3 - ($purge_pointer * 23)] = 1)
+                                    purge_group(%SNARE_ROLL_SWISH_GROUPS[4+$purge_pointer] + $active_snare,0)
+                                end if                                  
 							end if
 						end if
-						inc($count3)
+                        if(%instrument_id_remap[$count3 - ($purge_pointer * 23)] = 1)
+                            $count3 := $count3 + 3 - $active_snare
+                        else
+                            inc($count3)
+                        end if
 						wait($LOAD_WAIT)
 					end while
 				else
@@ -7081,6 +7093,8 @@ on ui_control($purge_red)
 						inc($count3)
 						wait($LOAD_WAIT)
 					end while
+                    purge_group(%SNARE_ROLL_SWISH_GROUPS[0]+$active_snare,1)
+                    purge_group(%SNARE_ROLL_SWISH_GROUPS[1]+$active_snare,1)                     
 					{kick bleed}
 					if(pgs_get_key_val(INSTRUMENT_PURGE_STATE,0) = 1)
 						$count3 := %bleed_groups[0]
@@ -7149,9 +7163,16 @@ on ui_control($purge_red)
 									inc($count4)
 									wait($LOAD_WAIT)
 								end while
+                                if(%instrument_id_remap[$count3 - ($purge_pointer * 23)] = 1)
+                                    purge_group(%SNARE_ROLL_SWISH_GROUPS[4+$purge_pointer] + $active_snare,1)
+                                end if                                
 							end if
 						end if
-						inc($count3)
+                        if(%instrument_id_remap[$count3 - ($purge_pointer * 23)] = 1)
+                            $count3 := $count3 + 3 - $active_snare
+                        else
+                            inc($count3)
+                        end if
 						wait($LOAD_WAIT)
 					end while
 				else
