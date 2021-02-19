@@ -2603,10 +2603,14 @@ on ui_control ($oh_mix)
 			set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %GROUP_DATA[$count_1 * 8 + 4], -1, -1)
 			set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %GROUP_DATA[$count_1 * 8 + 5], -1, -1)
 			if ($instruments = $SNARE_ID)
+				set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %SNARE_ROLL_SWISH_GROUPS[4], -1, -1)
+				set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %SNARE_ROLL_SWISH_GROUPS[5], -1, -1)
 				$count_2 := 1
 				while ($count_2 < $NUM_SNARE_INSTRUMENTS)
 					set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %GROUP_DATA[$count_1 * 8 + 4] + $count_2 , -1, -1)
 					set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %GROUP_DATA[$count_1 * 8 + 5] + $count_2 , -1, -1)
+					set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %SNARE_ROLL_SWISH_GROUPS[4] + $count_2 , -1, -1)
+					set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %SNARE_ROLL_SWISH_GROUPS[5] + $count_2 , -1, -1)
 					inc($count_2)
 				end while
 			end if
@@ -2639,10 +2643,14 @@ on ui_control ($room_mix)
 			set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %GROUP_DATA[$count_1 * 8 + 6], -1, -1)
 			set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %GROUP_DATA[$count_1 * 8 + 7], -1, -1)
 			if ($instruments = $SNARE_ID)
+				set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %SNARE_ROLL_SWISH_GROUPS[6], -1, -1)
+				set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %SNARE_ROLL_SWISH_GROUPS[7], -1, -1)
 				$count_2 := 1
 				while ($count_2 < $NUM_SNARE_INSTRUMENTS)
 					set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %GROUP_DATA[$count_1 * 8 + 6] + $count_2 , -1, -1)
 					set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %GROUP_DATA[$count_1 * 8 + 7] + $count_2 , -1, -1)
+					set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %SNARE_ROLL_SWISH_GROUPS[6] + $count_2 , -1, -1)
+					set_engine_par($ENGINE_PAR_VOLUME, $sends_temp, %SNARE_ROLL_SWISH_GROUPS[7] + $count_2 , -1, -1)
 					inc($count_2)
 				end while
 			end if
