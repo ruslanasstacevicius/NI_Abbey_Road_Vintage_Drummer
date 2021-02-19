@@ -1231,8 +1231,6 @@ on init
 		{/Picture State}
 		
 		{Init}
-		set_control_par(%kit_sel_id[$KICK_ID], $CONTROL_PAR_VALUE, 1)
-		
 		$count_1 := 0
 		while ($count_1 < $NUM_INSTRUMENTS)
 			set_control_par(%kit_msk_id[$count_1], $CONTROL_PAR_PICTURE_STATE, pgs_get_key_val(INSTRUMENT_PURGE_STATE, $count_1))
@@ -1441,6 +1439,15 @@ on init
 			end select
 		end if
 		
+		read_persistent_var($instruments)
+		$prev_instrument := $instruments
+		set_control_par_str(%panel_id[1], $CONTROL_PAR_PICTURE, !INSTRUMENT_PICS[$instruments])
+		set_control_par(%kit_sel_id[$instruments], $CONTROL_PAR_VALUE, 1)
+		if ($instruments = $SNARE_ID)
+			set_control_par(%kit_sn_id[0], $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING)
+			set_control_par(%kit_sn_id[1], $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING)
+			set_control_par(%kit_sn_id[2], $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING)
+		end if
 		if (pgs_get_key_val(INSTRUMENT_PURGE_STATE, $instruments) = 0)
 			set_menu_item_str(%panel_id[0], 0, "Load Instrument")
 			set_control_par_str(%panel_id[0],$CONTROL_PAR_PICTURE,"NID_kit_dropdown_unload_chip_red")
@@ -1448,8 +1455,6 @@ on init
 			set_menu_item_str(%panel_id[0], 0, "Unload Instrument")
 			set_control_par_str(%panel_id[0],$CONTROL_PAR_PICTURE,"NID_kit_dropdown_unload_chip_normal")
 		end if
-		
-		set_control_par_str(%panel_id[1], $CONTROL_PAR_PICTURE, !INSTRUMENT_PICS[$instruments])
 
 		$tune := get_engine_par($ENGINE_PAR_TUNE, %GROUP_DATA[%INSTRUMENT_OFFSET[$instruments] * 8 + 4], -1, -1)
 
