@@ -1586,8 +1586,8 @@ on init
 	make_instr_persistent($buses_view)
 	{make_persistent($kitmic_view)
 	make_persistent($buses_view)}
-	{read_persistent_var($kitmic_view)
-	read_persistent_var($buses_view)}
+	read_persistent_var($kitmic_view)
+	read_persistent_var($buses_view)
 
 	declare $kitmic_view_value
 	declare $buses_view_value
