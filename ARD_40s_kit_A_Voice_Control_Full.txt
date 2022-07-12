@@ -27,6 +27,8 @@ on init
 	message("")
 	set_script_title("Voice Control")
 
+	declare const $ZONE_LIMIT_LITE := 11000
+
 	declare $played_note
 
 	declare $event_cursor
@@ -58,7 +60,7 @@ on init
 	declare ui_label $debug_monitor (1,16)
 	set_text($debug_monitor,"")
 	set_control_par(get_ui_id($debug_monitor),$CONTROL_PAR_WIDTH,240)
-	set_control_par(get_ui_id($debug_monitor),$CONTROL_PAR_HEIGHT,230)
+	set_control_par(get_ui_id($debug_monitor),$CONTROL_PAR_HEIGHT,208)
 	set_control_par(get_ui_id($debug_monitor),$CONTROL_PAR_POS_X,345)
 	set_control_par(get_ui_id($debug_monitor),$CONTROL_PAR_POS_Y,1)
 	{/debug}
@@ -241,7 +243,7 @@ on init
 	{/Velocity Curves}
 
 	{!!!START TESTING PART1!!!}
-		set_ui_height_px(300)
+		set_ui_height_px(250)
 
 		declare ui_knob $point_1_in (1, 127, 1)
 		declare ui_knob $point_1_out (1, 127, 1)
@@ -1301,12 +1303,14 @@ on note
 			    $kt1_grp_id & " | " & $kt2_grp_id & " | " & $kt3_grp_id & " | " & $kt4_grp_id)}
 
 	{Note Variation}
-	if (%note_variations[$EVENT_NOTE] > 1)
-		while (%random_count_1er[$EVENT_NOTE] = %last_random_count_1er[$EVENT_NOTE])
-			%random_count_1er[$EVENT_NOTE] := random(0,%note_variations[$EVENT_NOTE]-1)
-		end while
-	else
-		%random_count_1er[$EVENT_NOTE] := 0
+	if ($NUM_ZONES > $ZONE_LIMIT_LITE)
+		if (%note_variations[$EVENT_NOTE] > 1)
+			while (%random_count_1er[$EVENT_NOTE] = %last_random_count_1er[$EVENT_NOTE])
+				%random_count_1er[$EVENT_NOTE] := random(0,%note_variations[$EVENT_NOTE]-1)
+			end while
+		else
+			%random_count_1er[$EVENT_NOTE] := 0
+		end if
 	end if
 
 	{Optimization Articulation Offset Hack}
