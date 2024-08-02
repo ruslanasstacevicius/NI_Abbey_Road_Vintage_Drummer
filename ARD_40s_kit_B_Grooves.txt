@@ -517,8 +517,8 @@ on init
 	end if
 	
 	declare $first_time_ever_flag := 1
-	make_persistent($first_time_ever_flag)
-	read_persistent_var($first_time_ever_flag)
+	{ make_persistent($first_time_ever_flag)
+	read_persistent_var($first_time_ever_flag) }
 	if ($first_time_ever_flag = 1)
 		@file_path := get_folder($GET_FOLDER_LIBRARY_DIR) & "MIDI Files/02 New Orleans Jazz/01 One Step 118BPM/04 16th Cym.mid"
 		@file_name := "04 16th Cym"
